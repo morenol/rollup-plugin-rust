@@ -6,17 +6,17 @@ const { exec, mkdir, get_cache_dir, tar, exists, spawn, info, debug } = require(
 
 function wasm_bindgen_name(version) {
     switch (process.platform) {
-    case "win32":
-        return `wasm-bindgen-${version}-x86_64-pc-windows-msvc`;
-    case "darwin":
-        return `wasm-bindgen-${version}-x86_64-apple-darwin`;
-    default:
-        return `wasm-bindgen-${version}-x86_64-unknown-linux-musl`;
+        case "win32":
+            return `wasm-bindgen-${version}-x86_64-pc-windows-msvc`;
+        case "darwin":
+            return `wasm-bindgen-${version}-x86_64-apple-darwin`;
+        default:
+            return `wasm-bindgen-${version}-aarch64-unknown-linux-musl`;
     }
 }
 
 function wasm_bindgen_url(version, name) {
-    return `https://github.com/rustwasm/wasm-bindgen/releases/download/${version}/${name}.tar.gz`
+    return `https://github.com/morenol/wasm-bindgen/releases/download/${version}/${name}.tar.gz`
 }
 
 function wasm_bindgen_path(dir) {
@@ -31,16 +31,7 @@ function wasm_bindgen_path(dir) {
 const VERSION_REGEXP = /([\d\.]+)[\r\n]*$/;
 
 async function wasm_bindgen_version(dir) {
-    const pkg_spec = await exec("cargo pkgid wasm-bindgen", { cwd: dir });
-
-    const version = VERSION_REGEXP.exec(pkg_spec);
-
-    if (version) {
-        return version[1];
-
-    } else {
-        throw new Error("Could not determine wasm-bindgen version");
-    }
+    return "v0.1.0";
 }
 
 
