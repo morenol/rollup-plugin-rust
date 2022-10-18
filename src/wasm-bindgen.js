@@ -36,7 +36,7 @@ function wasm_bindgen_path(dir) {
 const VERSION_REGEXP = /([\d\.]+)[\r\n]*$/;
 
 async function wasm_bindgen_version(dir) {
-    return "v0.2.0";
+    return "v0.2.1";
 }
 
 
