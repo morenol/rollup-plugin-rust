@@ -13,7 +13,7 @@ function wasm_bindgen_name(version) {
         default:
   	    switch (process.arch) {
 		case "arm64":
-            	  return `wasm-bindgen-${version}-aarch64-unknown-linux-musl`;
+            	  return `wasm-bindgen-${version}-aarch64-unknown-linux-gnu`;
  		default:
 		 return `wasm-bindgen-${version}-x86_64-unknown-linux-musl`;
 	}
@@ -36,7 +36,7 @@ function wasm_bindgen_path(dir) {
 const VERSION_REGEXP = /([\d\.]+)[\r\n]*$/;
 
 async function wasm_bindgen_version(dir) {
-    return "v0.1.0";
+    return "v0.2.0";
 }
 
 
