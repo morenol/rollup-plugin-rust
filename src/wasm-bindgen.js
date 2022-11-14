@@ -1,7 +1,7 @@
 const $path = require("path");
 const $tar = require("tar");
 const $fetch = require("node-fetch");
-const { exec, mkdir, get_cache_dir, tar, exists, spawn, info, debug } = require("./utils");
+const { exec, mkdir, get_cache_dir, tar, exists, spawn, info, debug, getEnv } = require("./utils");
 
 
 function wasm_bindgen_name(version) {
@@ -76,7 +76,11 @@ async function get_wasm_bindgen(dir, options) {
 
 
 async function run_wasm_bindgen(dir, wasm_path, out_dir, options) {
-    const wasm_bindgen_command = await get_wasm_bindgen(dir, options);
+    let wasm_bindgen_command = getEnv("WASM_BINDGEN_BIN", null);
+
+    if (wasm_bindgen_command == null) {
+        wasm_bindgen_command = await get_wasm_bindgen(dir, options);
+    }
 
     // TODO what about --debug --no-demangle --keep-debug ?
     let wasm_bindgen_args = [
